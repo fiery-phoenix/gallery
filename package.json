@@ -1,0 +1,24 @@
+{
+  "name": "gallery",
+  "version": "0.0.1",
+  "description": "Simple gallery",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fiery-phoenix/gallery.git"
+  },
+  "author": "Kseniya",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/fiery-phoenix/gallery/issues"
+  },
+  "homepage": "https://github.com/fiery-phoenix/gallery#readme",
+  "devDependencies": {
+    "browser-sync": "^2.18.13",
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2"
+  }
+}
