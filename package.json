@@ -4,7 +4,7 @@
   "description": "Simple gallery",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "casperjs test test/test.js"
   },
   "repository": {
     "type": "git",
@@ -18,9 +18,13 @@
   "homepage": "https://github.com/fiery-phoenix/gallery#readme",
   "devDependencies": {
     "browser-sync": "^2.18.13",
+    "casperjs": "^1.1.4",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
+    "gulp-casperjs": "0.0.6",
     "gulp-typescript": "^3.2.2",
+    "phantomcss": "^1.1.5",
+    "phantomjs-prebuilt": "^2.1.15",
     "typescript": "^2.4.2"
   }
 }

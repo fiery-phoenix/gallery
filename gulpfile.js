@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var typescript = require('gulp-typescript');
 var del = require('del');
+var casperJs = require('gulp-casperjs');
 
 gulp.task('default', ['clean', 'copyIndex', 'copyCSS', 'typescript', 'browserSync', 'watch']);
 
@@ -40,4 +41,11 @@ gulp.task('watch', function () {
     gulp.watch('src/index.html', ['copyIndex']);
     gulp.watch('src/gallery.css', ['copyCSS']);
     gulp.watch('src/**/*.ts', ['typescript']);
+});
+
+gulp.task('test', function () {
+    gulp.src('test/test.js')
+        .pipe(casperJs({
+            binPath: './node_modules/casperjs/bin/casperjs'
+        }));
 });
