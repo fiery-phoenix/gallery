@@ -18,7 +18,9 @@
   "homepage": "https://github.com/fiery-phoenix/gallery#readme",
   "devDependencies": {
     "browser-sync": "^2.18.13",
+    "del": "^3.0.0",
     "gulp": "^3.9.1",
-    "gulp-clean": "^0.3.2"
+    "gulp-typescript": "^3.2.2",
+    "typescript": "^2.4.2"
   }
 }
