@@ -3,19 +3,21 @@ var browserSync = require('browser-sync');
 var typescript = require('gulp-typescript');
 var del = require('del');
 
-gulp.task('default', ['clean', 'copySource', 'typescript', 'browserSync', 'watch']);
+gulp.task('default', ['clean', 'copyIndex', 'copyCSS', 'typescript', 'browserSync', 'watch']);
 
-gulp.task('copySource', function()  {
-    console.log('Start');
-
+gulp.task('copyIndex', function() {
     gulp.src('src/index.html')
-    .pipe(gulp.dest('./dist'))
-    .pipe(browserSync.reload({stream: true}));
-
-    console.log('Finish');
+        .pipe(gulp.dest('./dist'))
+        .pipe(browserSync.reload({stream: true}));
 });
 
-gulp.task('browserSync', function() {
+gulp.task('copyCSS', function() {
+    gulp.src('src/gallery.css')
+        .pipe(gulp.dest('./dist'))
+        .pipe(browserSync.reload({stream: true}));
+});
+
+gulp.task('browserSync', function () {
     browserSync({
         server: {
             baseDir: './dist'
@@ -34,7 +36,8 @@ gulp.task('clean', function() {
     return del.sync('./dist');
 });
 
-gulp.task('watch', function() {
-    gulp.watch('src/index.html', ['copySource']);
+gulp.task('watch', function () {
+    gulp.watch('src/index.html', ['copyIndex']);
+    gulp.watch('src/gallery.css', ['copyCSS']);
     gulp.watch('src/**/*.ts', ['typescript']);
 });
