@@ -8,8 +8,7 @@ export class Carousel {
     private n: number;
     private index: number = 0;
     private indicator: Indicator;
-    private xDown: number;
-    private yDown: number;
+    private slidingCoordinates: Coordinates = new Coordinates();
 
     constructor(container: HTMLElement) {
         this.container = container;
@@ -31,31 +30,21 @@ export class Carousel {
             new LeftNavigator().attachTo(this.container).onNavigation(() => this.previous());
             const carousel = this;
             this.container.addEventListener('touchstart', (e) => {
-                carousel.xDown = e.touches[0].clientX;
-                carousel.yDown = e.touches[0].clientY;
+                carousel.slidingCoordinates.update(e.touches[0].clientX, e.touches[0].clientY);
             }, false);
 
             this.container.addEventListener('touchmove', (e) => {
-                if ( ! carousel.xDown || ! carousel.yDown ) {
-                    return;
-                }
+                const xDiff = carousel.slidingCoordinates.getDirection(e.touches[0].clientX, e.touches[0].clientY);
 
-                let xUp = e.touches[0].clientX;
-                let yUp = e.touches[0].clientY;
-
-                let xDiff = carousel.xDown  - xUp;
-                let yDiff = carousel.yDown  - yUp;
-
-                if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {
-                    if ( xDiff > 0 ) {
+                if (xDiff !== 0) {
+                    if (xDiff > 0) {
                         carousel.previous();
                     } else {
                         carousel.next();
                     }
                 }
 
-                carousel.xDown = null;
-                carousel.yDown = null;
+                carousel.slidingCoordinates.unset();
             }, false);
         }
     }
@@ -91,5 +80,35 @@ export class Carousel {
 
     private showItem(index: number) {
         this.container.children[index]['style'].display = 'block';
+    }
+}
+
+class Coordinates {
+
+    private x: number;
+    private y: number;
+
+    public update(x: number, y: number) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public unset() {
+        this.x = null;
+        this.y = null;
+    }
+
+    public getDirection(x: number, y: number): number {
+        if (!this.x || !this.y) {
+            return 0;
+        }
+        const xDiff = this.x - x;
+        const yDiff = this.y - y;
+
+        if (Math.abs(xDiff) > Math.abs(yDiff)) {
+            return xDiff;
+        }
+
+        return 0;
     }
 }
