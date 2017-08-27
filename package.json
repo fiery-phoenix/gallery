@@ -18,13 +18,23 @@
   "homepage": "https://github.com/fiery-phoenix/gallery#readme",
   "devDependencies": {
     "browser-sync": "^2.18.13",
+    "browserify": "^14.4.0",
     "casperjs": "^1.1.4",
     "del": "^3.0.0",
+    "document-register-element": "^1.7.0",
     "gulp": "^3.9.1",
     "gulp-casperjs": "0.0.6",
+    "gulp-rename": "^1.2.2",
+    "gulp-tslint": "^8.1.2",
     "gulp-typescript": "^3.2.2",
+    "gulp-uglify": "^3.0.0",
     "phantomcss": "^1.1.5",
     "phantomjs-prebuilt": "^2.1.15",
-    "typescript": "^2.4.2"
+    "tsify": "^3.0.1",
+    "tslint": "^5.7.0",
+    "typescript": "^2.4.2",
+    "uglify-js": "^3.0.28",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
   }
 }

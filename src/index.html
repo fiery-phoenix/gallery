@@ -4,14 +4,12 @@
     <meta charset="UTF-8">
     <title>Gallery</title>
     <link rel="stylesheet" href="gallery.css">
-    <script src="gallery.js"></script>
 </head>
 <body>
-<div>
-    <img src="http://lorempixel.com/600/350/cats/4"/>
-</div>
-<script>
-    var gallery = new Gallery();
-</script>
+    <simple-gallery>
+        <gallery-item src="http://lorempixel.com/600/350/cats/4"></gallery-item>
+    </simple-gallery>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/document-register-element/1.5.0/document-register-element.js"></script>
+    <script src="gallery.js"></script>
 </body>
 </html>

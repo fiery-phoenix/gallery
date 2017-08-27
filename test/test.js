@@ -16,14 +16,21 @@ casper.test.begin('Testing image screenshot', function(test) {
         test.assertTitle('Gallery');
     });
 
-    casper.then(function now_check_the_screenshots() {
-        casper.wait(1000);
+    casper.then(function() {
+        test.assertExists('gallery-item img');
+    });
+
+    casper.then(function() {
+        casper.wait(2000);
         phantomcss.screenshot({
             top: 0,
             left: 0,
             width: 1024,
             height: 768
         }, 'whole page');
+    });
+
+    casper.then(function() {
         phantomcss.compareAll();
     });
 

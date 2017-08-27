@@ -3,6 +3,14 @@ var browserSync = require('browser-sync');
 var typescript = require('gulp-typescript');
 var del = require('del');
 var casperJs = require('gulp-casperjs');
+var browserify = require('browserify');
+var tsify = require('tsify');
+var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
+var uglify = require('gulp-uglify');
+var rename = require("gulp-rename");
+var tslint = require("gulp-tslint");
+
 
 gulp.task('default', ['clean', 'copyIndex', 'copyCSS', 'typescript', 'browserSync', 'watch']);
 
@@ -18,7 +26,7 @@ gulp.task('copyCSS', function() {
         .pipe(browserSync.reload({stream: true}));
 });
 
-gulp.task('browserSync', function () {
+gulp.task('browserSync', function() {
     browserSync({
         server: {
             baseDir: './dist'
@@ -27,25 +35,39 @@ gulp.task('browserSync', function () {
 });
 
 gulp.task('typescript', function() {
-    return gulp.src('src/**/*.ts')
-    .pipe(typescript())
-    .pipe(gulp.dest("./dist"))
-    .pipe(browserSync.reload({stream: true}));
+    browserify('./src/gallery.ts')
+        .plugin(tsify)
+        .bundle()
+        .pipe(source('gallery.js'))
+        .pipe(buffer())
+        .pipe(gulp.dest('./dist'))
+        .pipe(buffer())
+        .pipe(uglify())
+        .pipe(rename({suffix: '.min'}))
+        .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('clean', function() {
     return del.sync('./dist');
 });
 
-gulp.task('watch', function () {
+gulp.task('watch', function() {
     gulp.watch('src/index.html', ['copyIndex']);
     gulp.watch('src/gallery.css', ['copyCSS']);
     gulp.watch('src/**/*.ts', ['typescript']);
 });
 
-gulp.task('test', function () {
+gulp.task('test', function() {
     gulp.src('test/test.js')
         .pipe(casperJs({
             binPath: './node_modules/casperjs/bin/casperjs'
         }));
+});
+
+gulp.task("tslint", function() {
+    gulp.src("src/**/*.ts")
+        .pipe(tslint({
+            formatter: "verbose"
+        }))
+        .pipe(tslint.report());
 });
