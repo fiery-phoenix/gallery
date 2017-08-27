@@ -1,7 +1,6 @@
 var phantomcss = require('phantomcss');
 
 function screenshot(file) {
-    casper.wait(2000);
     phantomcss.screenshot({
         top: 0,
         left: 0,
@@ -10,8 +9,8 @@ function screenshot(file) {
     }, file);
 }
 
-function clickNext(file) {
-    casper.click('simple-gallery img');
+function checkClickNext(selector, file) {
+    casper.click(selector);
     screenshot(file);
 }
 
@@ -36,11 +35,20 @@ casper.test.begin('Testing image screenshot', function(test) {
     });
 
     casper.then(function() {
+        casper.wait(2000);
         screenshot('first');
     });
 
     casper.then(function() {
-        clickNext('second');
+        checkClickNext('img', 'second');
+    });
+
+    casper.then(function() {
+        checkClickNext('gallery-item:nth-child(2) img', 'third');
+    });
+
+    casper.then(function() {
+        checkClickNext('gallery-item:nth-child(3) img', 'first-again');
     });
 
     casper.then(function() {
