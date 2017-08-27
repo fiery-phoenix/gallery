@@ -3,6 +3,12 @@ simple-gallery img {
     position:absolute;
     top:-100%; bottom:-100%;
     left:-100%; right:-100%;
+
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
 }
 
 simple-gallery p {
@@ -13,4 +19,40 @@ simple-gallery p {
     color: black;
     opacity: 0.5;
     margin: 0;
+
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+}
+
+simple-gallery .nav-button-right {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 30%;
+    opacity: 0.5;
+}
+
+simple-gallery .nav-button-right:hover {
+    opacity: 1;
+}
+
+simple-gallery .nav-button-inner {
+    cursor: hand;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    font-size: 24px;
+    margin-top: -12px;
+    margin-right: 20px;
+
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
 }

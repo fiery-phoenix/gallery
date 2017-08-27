@@ -1,4 +1,5 @@
 export class Indicator {
+
     private element: HTMLElement;
     private n: number;
 

@@ -9,8 +9,8 @@ function screenshot(file) {
     }, file);
 }
 
-function checkClickNext(selector, file) {
-    casper.click(selector);
+function checkClickNext(file) {
+    casper.click('.nav-button-right');
     screenshot(file);
 }
 
@@ -40,15 +40,15 @@ casper.test.begin('Testing image screenshot', function(test) {
     });
 
     casper.then(function() {
-        checkClickNext('img', 'second');
+        checkClickNext('second');
     });
 
     casper.then(function() {
-        checkClickNext('gallery-item:nth-child(2) img', 'third');
+        checkClickNext('third');
     });
 
     casper.then(function() {
-        checkClickNext('gallery-item:nth-child(3) img', 'first-again');
+        checkClickNext('first-again');
     });
 
     casper.then(function() {

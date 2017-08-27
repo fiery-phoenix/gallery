@@ -1,6 +1,8 @@
 import {Indicator} from './indicator';
+import {RightNavigator} from './navigator';
 
 export class Carousel {
+
     private container: HTMLElement;
 
     private n: number;
@@ -17,17 +19,20 @@ export class Carousel {
         for (let i = 1; i < carousel.n; i++) {
             this.hideItem(i);
         }
-        this.container.addEventListener('click', function() {
-            carousel.hideItem(carousel.index);
-            carousel.showItem(carousel.incIndex());
-            carousel.indicator.updateWith(carousel.index + 1);
-        });
-        this.addIndicator();
+        this.addNavigation();
     }
 
-    private addIndicator() {
+    public next() {
+        this.hideItem(this.index);
+        this.showItem(this.incIndex());
+        this.indicator.updateWith(this.index + 1);
+    }
+
+    private addNavigation() {
         if (this.n > 0) {
             this.indicator = new Indicator(this.n).attachTo(this.container);
+            const rightNavigator = new RightNavigator().attachTo(this.container);
+            rightNavigator.onNavigation(() => this.next());
         }
     }
 
