@@ -21,7 +21,6 @@
     "browserify": "^14.4.0",
     "casperjs": "^1.1.4",
     "del": "^3.0.0",
-    "document-register-element": "^1.7.0",
     "gulp": "^3.9.1",
     "gulp-casperjs": "0.0.6",
     "gulp-rename": "^1.2.2",

@@ -110,7 +110,6 @@
       "check-whitespace"
     ],
     "one-variable-per-declaration": true,
-    "only-arrow-functions": [true, "allow-declarations", "allow-named-functions"],
     "prefer-const": true,
     "prefer-for-of": false,
     "prefer-function-over-method": false,

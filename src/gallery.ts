@@ -1,5 +1,11 @@
-let gallery = Object.create(HTMLElement.prototype);
-let galleryItem = Object.create(HTMLElement.prototype);
+import {Carousel} from './carousel';
+
+const gallery = Object.create(HTMLElement.prototype);
+gallery.createdCallback = function() {
+    this.carousel = new Carousel(this);
+    this.carousel.init();
+};
+const galleryItem = Object.create(HTMLElement.prototype);
 galleryItem.createdCallback = function() {
     const img = new Image();
     const item = this;
