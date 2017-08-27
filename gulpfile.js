@@ -10,9 +10,9 @@ var buffer = require('vinyl-buffer');
 var uglify = require('gulp-uglify');
 var rename = require("gulp-rename");
 var tslint = require("gulp-tslint");
+var sass = require('gulp-sass');
 
-
-gulp.task('default', ['clean', 'copyIndex', 'copyCSS', 'typescript', 'browserSync', 'watch']);
+gulp.task('default', ['clean', 'copyIndex', 'copySCSS', 'typescript', 'browserSync', 'watch']);
 
 gulp.task('copyIndex', function() {
     gulp.src('src/index.html')
@@ -20,8 +20,9 @@ gulp.task('copyIndex', function() {
         .pipe(browserSync.reload({stream: true}));
 });
 
-gulp.task('copyCSS', function() {
-    gulp.src('src/gallery.css')
+gulp.task('copySCSS', function() {
+    return gulp.src('src/gallery.scss')
+        .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest('./dist'))
         .pipe(browserSync.reload({stream: true}));
 });
@@ -53,7 +54,7 @@ gulp.task('clean', function() {
 
 gulp.task('watch', function() {
     gulp.watch('src/index.html', ['copyIndex']);
-    gulp.watch('src/gallery.css', ['copyCSS']);
+    gulp.watch('src/gallery.scss', ['copySCSS']);
     gulp.watch('src/**/*.ts', ['typescript']);
 });
 
