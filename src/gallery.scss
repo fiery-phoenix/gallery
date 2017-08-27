@@ -16,6 +16,7 @@ $half: 0.5;
   height: 100%;
   width: $middle;
   opacity: $half;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 
 @mixin nav-button-inner {
