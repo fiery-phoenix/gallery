@@ -9,8 +9,13 @@ function screenshot(file) {
     }, file);
 }
 
-function checkClickNext(file) {
+function toRight(file) {
     casper.click('.nav-button-right');
+    screenshot(file);
+}
+
+function toLeft(file) {
+    casper.click('.nav-button-left');
     screenshot(file);
 }
 
@@ -40,15 +45,23 @@ casper.test.begin('Testing image screenshot', function(test) {
     });
 
     casper.then(function() {
-        checkClickNext('second');
+        toRight('second');
     });
 
     casper.then(function() {
-        checkClickNext('third');
+        toRight('third');
     });
 
     casper.then(function() {
-        checkClickNext('first-again');
+        toRight('first-again');
+    });
+
+    casper.then(function() {
+        toLeft('thrird-again');
+    });
+
+    casper.then(function() {
+        toLeft('second-again');
     });
 
     casper.then(function() {

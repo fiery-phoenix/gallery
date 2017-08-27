@@ -1,5 +1,5 @@
 import {Indicator} from './indicator';
-import {RightNavigator} from './navigator';
+import {LeftNavigator, RightNavigator} from './navigator';
 
 export class Carousel {
 
@@ -22,22 +22,36 @@ export class Carousel {
         this.addNavigation();
     }
 
+    private addNavigation() {
+        if (this.n > 0) {
+            this.indicator = new Indicator(this.n).attachTo(this.container);
+            new RightNavigator().attachTo(this.container).onNavigation(() => this.next());
+            new LeftNavigator().attachTo(this.container).onNavigation(() => this.previous());
+        }
+    }
+
     public next() {
         this.hideItem(this.index);
         this.showItem(this.incIndex());
         this.indicator.updateWith(this.index + 1);
     }
 
-    private addNavigation() {
-        if (this.n > 0) {
-            this.indicator = new Indicator(this.n).attachTo(this.container);
-            const rightNavigator = new RightNavigator().attachTo(this.container);
-            rightNavigator.onNavigation(() => this.next());
-        }
+    private previous() {
+        this.hideItem(this.index);
+        this.showItem(this.decIndex());
+        this.indicator.updateWith(this.index + 1);
     }
 
     private incIndex(): number {
         this.index = (this.index + 1) % this.n;
+        return this.index;
+    }
+
+    private decIndex() {
+        this.index = (this.index - 1);
+        if (this.index < 0) {
+            this.index = this.n - 1;
+        }
         return this.index;
     }
 

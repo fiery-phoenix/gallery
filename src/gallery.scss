@@ -31,6 +31,16 @@ simple-gallery {
     @include non-selectable;
   }
 
+  .nav-button-left {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: $middle;
+    opacity: $half;
+  }
+
   .nav-button-right {
     cursor: pointer;
     position: absolute;
@@ -41,11 +51,22 @@ simple-gallery {
     opacity: $half;
   }
 
-  .nav-button-right:hover {
+  .nav-button-right:hover, .nav-button-left:hover {
     opacity: 1;
   }
 
-  .nav-button-inner {
+  .nav-button-left .nav-button-inner {
+    cursor: hand;
+    position: absolute;
+    left: 0;
+    top: $middle;
+    font-size: 24px;
+    margin-top: -12px;
+    margin-left: 20px;
+    @include non-selectable;
+  }
+
+  .nav-button-right .nav-button-inner {
     cursor: hand;
     position: absolute;
     right: 0;
