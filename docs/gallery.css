@@ -11,6 +11,18 @@ simple-gallery img {
   -webkit-user-select: none;
   -o-user-select: none; }
 
+simple-gallery gallery-item.hidden img {
+  visibility: hidden;
+  opacity: 0; }
+
+simple-gallery gallery-item.shown img {
+  opacity: 1;
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -ms-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s; }
+
 simple-gallery p {
   position: absolute;
   bottom: 0;

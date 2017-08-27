@@ -63,10 +63,10 @@ var Carousel = (function () {
         return this.index;
     };
     Carousel.prototype.hideItem = function (index) {
-        this.container.children[index]['style'].display = 'none';
+        this.container.children[index].className = 'hidden';
     };
     Carousel.prototype.showItem = function (index) {
-        this.container.children[index]['style'].display = 'block';
+        this.container.children[index].className = 'shown';
     };
     return Carousel;
 }());
