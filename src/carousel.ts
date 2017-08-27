@@ -1,8 +1,11 @@
+import {Indicator} from './indicator';
+
 export class Carousel {
     private container: HTMLElement;
 
     private n: number;
     private index: number = 0;
+    private indicator: Indicator;
 
     constructor(container: HTMLElement) {
         this.container = container;
@@ -17,7 +20,15 @@ export class Carousel {
         this.container.addEventListener('click', function() {
             carousel.hideItem(carousel.index);
             carousel.showItem(carousel.incIndex());
+            carousel.indicator.updateWith(carousel.index + 1);
         });
+        this.addIndicator();
+    }
+
+    private addIndicator() {
+        if (this.n > 0) {
+            this.indicator = new Indicator(this.n).attachTo(this.container);
+        }
     }
 
     private incIndex(): number {
