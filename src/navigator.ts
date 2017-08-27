@@ -1,12 +1,12 @@
-export class RightNavigator {
+abstract class Navigator {
 
     private element: HTMLElement;
 
-    constructor() {
+    protected constructor(direction: string, representation: string) {
         const element = document.createElement('div');
-        element.setAttribute('class', 'nav-button-right');
+        element.setAttribute('class', 'nav-button-' + direction);
         const innerDiv = document.createElement('div');
-        innerDiv.innerHTML = '&gt;';
+        innerDiv.innerHTML = representation;
         innerDiv.setAttribute('class', 'nav-button-inner');
         element.appendChild(innerDiv);
         this.element = element;
@@ -22,26 +22,14 @@ export class RightNavigator {
     }
 }
 
-export class LeftNavigator {
-
-    private element: HTMLElement;
-
+export class RightNavigator extends Navigator {
     constructor() {
-        const element = document.createElement('div');
-        element.setAttribute('class', 'nav-button-left');
-        const innerDiv = document.createElement('div');
-        innerDiv.innerHTML = '&lt;';
-        innerDiv.setAttribute('class', 'nav-button-inner');
-        element.appendChild(innerDiv);
-        this.element = element;
+        super('right', '&gt;');
     }
+}
 
-    public attachTo(parent: HTMLElement): LeftNavigator {
-        parent.appendChild(this.element);
-        return this;
-    }
-
-    public onNavigation(f: Function) {
-        this.element.addEventListener('click', () => f());
+export class LeftNavigator extends Navigator {
+    constructor() {
+        super('left', '&lt;');
     }
 }

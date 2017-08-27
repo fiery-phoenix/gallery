@@ -9,6 +9,23 @@ $half: 0.5;
   -o-user-select: none;
 }
 
+@mixin nav-button {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: $middle;
+  opacity: $half;
+}
+
+@mixin nav-button-inner {
+  cursor: hand;
+  position: absolute;
+  top: $middle;
+  font-size: 24px;
+  margin-top: -12px;
+}
+
 simple-gallery {
   img {
     margin: auto;
@@ -32,23 +49,13 @@ simple-gallery {
   }
 
   .nav-button-left {
-    cursor: pointer;
-    position: absolute;
-    top: 0;
     left: 0;
-    height: 100%;
-    width: $middle;
-    opacity: $half;
+    @include nav-button;
   }
 
   .nav-button-right {
-    cursor: pointer;
-    position: absolute;
-    top: 0;
     right: 0;
-    height: 100%;
-    width: $middle;
-    opacity: $half;
+    @include nav-button;
   }
 
   .nav-button-right:hover, .nav-button-left:hover {
@@ -56,24 +63,17 @@ simple-gallery {
   }
 
   .nav-button-left .nav-button-inner {
-    cursor: hand;
-    position: absolute;
     left: 0;
-    top: $middle;
-    font-size: 24px;
-    margin-top: -12px;
     margin-left: 20px;
+    @include nav-button-inner;
     @include non-selectable;
   }
 
   .nav-button-right .nav-button-inner {
-    cursor: hand;
-    position: absolute;
     right: 0;
     top: $middle;
-    font-size: 24px;
-    margin-top: -12px;
     margin-right: 20px;
+    @include nav-button-inner;
     @include non-selectable;
   }
 }
