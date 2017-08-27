@@ -6,6 +6,7 @@ var navigator_1 = require("./navigator");
 var Carousel = (function () {
     function Carousel(container) {
         this.index = 0;
+        this.slidingCoordinates = new Coordinates();
         this.container = container;
     }
     Carousel.prototype.init = function () {
@@ -22,6 +23,22 @@ var Carousel = (function () {
             this.indicator = new indicator_1.Indicator(this.n).attachTo(this.container);
             new navigator_1.RightNavigator().attachTo(this.container).onNavigation(function () { return _this.next(); });
             new navigator_1.LeftNavigator().attachTo(this.container).onNavigation(function () { return _this.previous(); });
+            var carousel_1 = this;
+            this.container.addEventListener('touchstart', function (e) {
+                carousel_1.slidingCoordinates.update(e.touches[0].clientX, e.touches[0].clientY);
+            }, false);
+            this.container.addEventListener('touchmove', function (e) {
+                var xDiff = carousel_1.slidingCoordinates.getDirection(e.touches[0].clientX, e.touches[0].clientY);
+                if (xDiff !== 0) {
+                    if (xDiff > 0) {
+                        carousel_1.previous();
+                    }
+                    else {
+                        carousel_1.next();
+                    }
+                }
+                carousel_1.slidingCoordinates.unset();
+            }, false);
         }
     };
     Carousel.prototype.next = function () {
@@ -54,6 +71,30 @@ var Carousel = (function () {
     return Carousel;
 }());
 exports.Carousel = Carousel;
+var Coordinates = (function () {
+    function Coordinates() {
+    }
+    Coordinates.prototype.update = function (x, y) {
+        this.x = x;
+        this.y = y;
+    };
+    Coordinates.prototype.unset = function () {
+        this.x = null;
+        this.y = null;
+    };
+    Coordinates.prototype.getDirection = function (x, y) {
+        if (!this.x || !this.y) {
+            return 0;
+        }
+        var xDiff = this.x - x;
+        var yDiff = this.y - y;
+        if (Math.abs(xDiff) > Math.abs(yDiff)) {
+            return xDiff;
+        }
+        return 0;
+    };
+    return Coordinates;
+}());
 
 },{"./indicator":3,"./navigator":4}],2:[function(require,module,exports){
 "use strict";

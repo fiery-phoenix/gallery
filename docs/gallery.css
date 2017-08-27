@@ -32,7 +32,8 @@ simple-gallery .nav-button-left {
   top: 0;
   height: 100%;
   width: 50%;
-  opacity: 0.5; }
+  opacity: 0.5;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0); }
 
 simple-gallery .nav-button-right {
   right: 0;
@@ -41,7 +42,8 @@ simple-gallery .nav-button-right {
   top: 0;
   height: 100%;
   width: 50%;
-  opacity: 0.5; }
+  opacity: 0.5;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0); }
 
 simple-gallery .nav-button-right:hover, simple-gallery .nav-button-left:hover {
   opacity: 1; }
