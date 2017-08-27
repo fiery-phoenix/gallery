@@ -11,11 +11,13 @@ function screenshot(file) {
 
 function toRight(file) {
     casper.click('.nav-button-right');
+    casper.wait(500);
     screenshot(file);
 }
 
 function toLeft(file) {
     casper.click('.nav-button-left');
+    casper.wait(500);
     screenshot(file);
 }
 

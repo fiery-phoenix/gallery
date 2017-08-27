@@ -75,11 +75,11 @@ export class Carousel {
     }
 
     private hideItem(index: number) {
-        this.container.children[index]['style'].display = 'none';
+        this.container.children[index].className = 'hidden';
     }
 
     private showItem(index: number) {
-        this.container.children[index]['style'].display = 'block';
+        this.container.children[index].className = 'shown';
     }
 }
 
