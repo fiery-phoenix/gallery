@@ -8,7 +8,10 @@ gallery.createdCallback = function() {
 const galleryItem = Object.create(HTMLElement.prototype);
 galleryItem.createdCallback = function() {
     const img = new Image();
-    img.onload = () => this.appendChild(img);
+    img.onload = () => {
+        this.appendChild(img);
+        Carousel.resizeImage(img);
+    };
     img.src = this.getAttribute('src');
 };
 document['registerElement']('simple-gallery', {prototype: gallery});

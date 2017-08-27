@@ -79,7 +79,18 @@ export class Carousel {
     }
 
     private showItem(index: number) {
-        this.container.children[index].className = 'shown';
+        const child = this.container.children[index];
+        child.className = 'shown';
+
+        Carousel.resizeImage(child.firstChild);
+    }
+
+    public static resizeImage(img: Node) {
+        if (img['width'] / window.innerWidth > img['height'] / window.innerHeight) {
+            img['className'] = 'full-width';
+        } else {
+            img['className'] = 'full-height';
+        }
     }
 }
 

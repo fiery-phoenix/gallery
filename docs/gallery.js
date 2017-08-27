@@ -66,7 +66,17 @@ var Carousel = (function () {
         this.container.children[index].className = 'hidden';
     };
     Carousel.prototype.showItem = function (index) {
-        this.container.children[index].className = 'shown';
+        var child = this.container.children[index];
+        child.className = 'shown';
+        Carousel.resizeImage(child.firstChild);
+    };
+    Carousel.resizeImage = function (img) {
+        if (img['width'] / window.innerWidth > img['height'] / window.innerHeight) {
+            img['className'] = 'full-width';
+        }
+        else {
+            img['className'] = 'full-height';
+        }
     };
     return Carousel;
 }());
@@ -109,7 +119,10 @@ var galleryItem = Object.create(HTMLElement.prototype);
 galleryItem.createdCallback = function () {
     var _this = this;
     var img = new Image();
-    img.onload = function () { return _this.appendChild(img); };
+    img.onload = function () {
+        _this.appendChild(img);
+        carousel_1.Carousel.resizeImage(img);
+    };
     img.src = this.getAttribute('src');
 };
 document['registerElement']('simple-gallery', { prototype: gallery });
